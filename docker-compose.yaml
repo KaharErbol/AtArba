@@ -1,4 +1,6 @@
-# volumes:
+volumes:
+  fastapi-service-data:
+      external: true
 services:
   fastapi-service:
     build:
@@ -9,24 +11,18 @@ services:
     volumes:
       - ./fastapi-service:/app
     environment: 
-      DATABASE_URL: postgresql://user-name:password@postgres/db-name
-      WAIT_HOSTS: postgres:5432
-
-  volumes:
-    postgres-data:
-        external: true
-    # other volumes...
-  postgres:
-        build:
-            context: ./relational-data
-            dockerfile: ./Dockerfile.dev
-        volumes:
-            - postgres-data:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_MULTIPLE_DATABASES=
-            - POSTGRES_PASSWORD=password
-        ports:
-            - 15432:5432
+      DATABASE_URL: postgresql://atarba-user:atarba-password@db/db-atarba
+      WAIT_HOSTS: db:5432
+  db:
+    image: postgres:14.5-bullseye
+    environment: 
+      POSTGRES_PASSWORD: atarba-password
+      POSTGRES_USER: atarba-user
+      POSTGRES_DB: db-atarba
+    ports:
+      - "15432:5432"
+    volumes:
+      - fastapi-service:/var/lib/postgresql/data
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
