@@ -1,13 +1,13 @@
 # AtArba
-***
-AtArba is a web application for individuals who are interestd in selling and purchasing auto parts.
+
+AtArba is a web application for individuals who are interested in selling and purchasing auto parts.
 
 ## Key Features - MVP(Minimum Viable Product)
----
+
 1. Users are able to sign-up for an account, log-in, and log-out.
 2. Users can view items but need to logged in in order to sell.
-3. Users can purchase without log in, but need to fill out information while checkingout which also creates an account.
-4. After login, user can put item into the cart, so they can be able to checkit later.
+3. Users can purchase without log in, but need to fill out information while checking out which also creates an account.
+4. After login, user can put item into the cart, so they can be able to check it later.
 
 #### Further
 * After an item is sold, what happens? Should I create a **states table** for items, can be used
@@ -15,12 +15,12 @@ as a foreign key?
 
 
 ## Live Demo
----
+
 Live Demo Link: 
 
 
 ## Design
----
+
 * GHI
 * Wireframe
 * API
@@ -28,7 +28,7 @@ Live Demo Link:
 
 
 ## Installation
----
+
 1. Fork repository
 2. Clone repository to local: git clone https://gitlab.com/
 3. cd into new project directory
@@ -42,7 +42,7 @@ Access the FastAPI Swagger UI at http://localhost:8010/docs
 
 
 ## Requirements
----
+
 1. Python 3
 2. Docker Desktop
 3. VS Code
