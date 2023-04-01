@@ -9,6 +9,12 @@ The date of the entry:
 Keep your journal in reverse chronological order. Always put new entries at the top.
 ---
 
+## Mar 30, 2023
+* I created migrations file -> 001_create_my_table.py
+* I ran a migration
+
+I think a table for Categories are needed.
+
 ## Mar 29, 2023
 Today, I worked on:
 
