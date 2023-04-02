@@ -8,6 +8,17 @@ The date of the entry:
 
 Keep your journal in reverse chronological order. Always put new entries at the top.
 ---
+## Apr 1, 2023
+* I wrote Fast Api for get, post, put, delete
+* I added response status in case there is error 
+Now the items table has a full restful api to interact with, using fast api can be interesting, because I can write SQL to do what I want with the database. One thing I noticed, it's little tricky to add a foreign key, for now I think I can use table joins if I need any foreign key like operation.
+
+
+## Mar 31, 2023
+* Created a table in db
+* I wrote code for pydantic models 
+It's tricky if I set category type as Category class, may be it's abetter practice to utilize SQL joins to get some data, or create some tables.
+
 
 ## Mar 30, 2023
 * I created migrations file -> 001_create_my_table.py
