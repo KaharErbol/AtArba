@@ -8,6 +8,12 @@ The date of the entry:
 
 Keep your journal in reverse chronological order. Always put new entries at the top.
 ---
+## Apr 3, 2023
+* added users and status tables
+* fixed the problem - ModuleNotFoundError: No module named 'jwtdown_fastapi'
+* In order to install jwtdown-fasapi 0.5.0, th efastapi must be higher version.
+* I generated a random sign-in key, put it in the docker-compose.yml
+
 ## Apr 1, 2023
 * I wrote Fast Api for get, post, put, delete
 * I added response status in case there is error 

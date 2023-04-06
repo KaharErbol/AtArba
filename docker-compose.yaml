@@ -11,9 +11,13 @@ services:
     volumes:
       - ./fastapi-service:/app
     environment: 
+      SIGNING_KEY: b'hsc-ZQUloHWTR5jtvirgWCjozyMTo8WccEDRuQlzfoY='
       DATABASE_URL: postgresql://atarba-user:atarba-password@db/db-atarba
       WAIT_HOSTS: db:5432
       PORT: 8000
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
+
   db:
     image: postgres:14.7-bullseye
     environment: 
