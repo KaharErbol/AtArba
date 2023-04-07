@@ -14,7 +14,7 @@ class AccountIn(BaseModel):
     last_name: str
     username: str
     email: str
-    phone: int
+    phone: str
     zip: int
     password: str
     avatar_url: str
@@ -25,9 +25,8 @@ class AccountOut(BaseModel):
     last_name: str
     username: str
     email: str
-    phone: int
+    phone: str
     zip: int
-    password: str
     avatar_url: str
 
 
@@ -98,7 +97,7 @@ class AccountRepo:
                             zip,
                             hashed_password,
                             avatar_url
-                        FROM users;
+                        FROM users
                         WHERE username = %s
                         """,
                         [username],
@@ -111,7 +110,8 @@ class AccountRepo:
             return {"message": "Could not get account"}
 
 
-    def create(self, user: AccountIn,
+    def create(self, 
+               user: AccountIn,
                hashed_password: str) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -130,7 +130,8 @@ class AccountRepo:
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING
-                        first_name,
+                            id,
+                            first_name,
                             last_name,
                             username,
                             email,
@@ -160,9 +161,10 @@ class AccountRepo:
                         phone=user.phone,
                         zip=user.zip,
                         hashed_password=hashed_password,
-                        avatar_url=user.avatar_url
+                        avatar_url=user.avatar_url,
                     )
         except Exception:
+            print(Exception)
             return {"message": "Could not create a user"}
 
     def delete(self, id: int) -> bool:
@@ -220,10 +222,10 @@ class AccountRepo:
             "last_name": record[2],
             "username": record[3],
             "email": record[4],
-            "zip": record[5],
-            "phone": record[6],
+            "phone": record[5],
+            "zip": record[6],
             "hashed_password": record[7],
-            "avatar_url": record[8]
+            "avatar_url": record[8],
         }
 
         return account_dict

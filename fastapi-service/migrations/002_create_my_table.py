@@ -8,7 +8,7 @@ steps =[
             last_name VARCHAR(50) NOT NULL,
             username VARCHAR(50) NOT NULL,
             email VARCHAR(50) NOT NULL,
-            phone SMALLINT NOT NULL,
+            phone VARCHAR(50) NOT NULL,
             zip SMALLINT NOT NULL,
             hashed_password VARCHAR(250) NOT NULL,
             avatar_url VARCHAR(256)
