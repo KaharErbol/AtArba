@@ -127,7 +127,7 @@ class ItemRepository:
                 # get a cursor (something to run SQL with)
                 with conn.cursor() as db:
                     # Run our INSERT statement
-                    result = db.execute(
+                    db.execute(
                         """
                         SELECT 
                             id,
@@ -157,10 +157,11 @@ class ItemRepository:
                     #         listed_date=record[7],
                     #     )
                     #     result.append(item)
-                    return [
+                    items = [
                         self.record_to_item_out(record)
                         for record in db
                     ]
+                    return items
 
         except Exception as e:
             print(e)
@@ -208,6 +209,7 @@ class ItemRepository:
                     # return ItemOut(id=id, **old_data)
                     return self.item_in_to_out(id, item)
         except Exception:
+            print(Exception)
             return {"message": "Create did not work"}
     
     def item_in_to_out(self, id: int, item: ItemIn):
