@@ -8,6 +8,13 @@ The date of the entry:
 
 Keep your journal in reverse chronological order. Always put new entries at the top.
 ---
+## Apr 11, 2023
+* Found the issue causing the bad request (400) when creating an item
+PostgreSQL smallint , int , bigint and oid are converted to Python int . PostgreSQL real and double are converted to Python float . PostgreSQL numeric is converted to Python Decimal.
+* Changed the data type in migration file, will rebuild the docker-compose again
+* Still got the bad request 400, but data passed into database, the problem could be something else, I decided to go on
+
+
 ## Apr 3, 2023
 * added users and status tables
 * fixed the problem - ModuleNotFoundError: No module named 'jwtdown_fastapi'

@@ -10,7 +10,7 @@ steps =[
             category VARCHAR(50) NOT NULL,
             brand VARCHAR(50) NOT NULL,
             username VARCHAR(50) NOT NULL,
-            item_price NUMERIC(10,3) NOT NULL,
+            item_price REAL NOT NULL,
             listed_date DATE NOT NULL
         );
         """,

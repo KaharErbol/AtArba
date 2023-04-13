@@ -13,7 +13,7 @@ class ItemIn(BaseModel):
     category: str
     brand: str
     username: str
-    item_price: float
+    item_price: int
     listed_date: date
 
 class ItemOut(BaseModel):

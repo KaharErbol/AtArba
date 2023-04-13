@@ -16,7 +16,7 @@ def create_item(
     response: Response,
     repo: ItemRepository = Depends(),
     ): 
-    # response.status_code = 400
+    response.status_code = 400
     # print("Item", item)
     # print("Listed Date", item.listed_date.month)
     return repo.create(item)
