@@ -12,7 +12,6 @@ class ItemIn(BaseModel):
     item_description: str
     category: str
     brand: str
-    username: str
     item_price: int
     listed_date: date
 
@@ -80,7 +79,7 @@ class ItemRepository:
             return False
 
 
-    def update(self, item_id: int, item: ItemIn) -> Union[ItemOut, Error]:
+    def update(self, item_id: int, item: ItemIn, account_data: dict) -> Union[ItemOut, Error]:
         try:
             # connect to the database
             with pool.connection() as conn:
@@ -106,13 +105,13 @@ class ItemRepository:
                             item.item_description,
                             item.category,
                             item.brand,
-                            item.username,
+                            account_data['username'],
                             item.item_price,
                             item.listed_date,
                             item_id
                         ]
                     )
-                    return self.item_in_to_out(item_id, item)
+                    return self.item_in_to_out(item_id, item, account_data['username'])
         except Exception as e:
             print(e)
             return {"message": "Could not update the item"}
@@ -167,7 +166,7 @@ class ItemRepository:
             print(e)
             return {"message": "Could not get all items"}
 
-    def create(self, item: ItemIn) -> ItemOut:
+    def create(self, item: ItemIn, account_data: dict) -> ItemOut:
         try: 
             # connect to the database
             with pool.connection() as conn:
@@ -197,7 +196,7 @@ class ItemRepository:
                             item.item_description, 
                             item.category,
                             item.brand, 
-                            item.username, 
+                            account_data['username'], 
                             item.item_price, 
                             item.listed_date
                         ]
@@ -207,14 +206,14 @@ class ItemRepository:
                     # All BaseModel has dict() property
                     # old_data = item.dict()
                     # return ItemOut(id=id, **old_data)
-                    return self.item_in_to_out(id, item)
+                    return self.item_in_to_out(id, item, account_data['username'])
         except Exception:
             print(Exception)
             return {"message": "Create did not work"}
     
-    def item_in_to_out(self, id: int, item: ItemIn):
+    def item_in_to_out(self, id: int, item: ItemIn, username: str):
         old_data = item.dict()
-        return ItemOut(id=id, **old_data)
+        return ItemOut(id=id, **old_data, username=username)
 
     def record_to_item_out(self, record):
         return ItemOut(

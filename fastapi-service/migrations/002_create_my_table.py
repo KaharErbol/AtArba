@@ -9,7 +9,7 @@ steps =[
             username VARCHAR(50) NOT NULL,
             email VARCHAR(50) NOT NULL,
             phone VARCHAR(50) NOT NULL,
-            zip SMALLINT NOT NULL,
+            zip VARCHAR(10) NOT NULL,
             hashed_password VARCHAR(250) NOT NULL,
             avatar_url VARCHAR(256)
         );

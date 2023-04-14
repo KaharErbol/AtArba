@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Response
 from typing import Union, List, Optional
+from authenticator import authenticator
 from queries.items import (
     Error,
     ItemIn, 
@@ -15,11 +16,10 @@ def create_item(
     item: ItemIn,
     response: Response,
     repo: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     ): 
-    response.status_code = 400
-    # print("Item", item)
-    # print("Listed Date", item.listed_date.month)
-    return repo.create(item)
+    response.status = 400
+    return repo.create(item, account_data)
 
 @router.get("/items", response_model=Union[Error,List[ItemOut]])
 def get_all(
@@ -32,8 +32,9 @@ def update_item(
     item_id: int,
     item: ItemIn,
     repo: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, ItemOut]:
-    return repo.update(item_id, item)
+    return repo.update(item_id, item, account_data)
 
 @router.delete("/items/{item_id}", response_model=bool)
 def delete_item(

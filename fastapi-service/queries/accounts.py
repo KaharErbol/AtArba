@@ -15,7 +15,7 @@ class AccountIn(BaseModel):
     username: str
     email: str
     phone: str
-    zip: int
+    zip: str
     password: str
     avatar_url: str
 
@@ -26,7 +26,7 @@ class AccountOut(BaseModel):
     username: str
     email: str
     phone: str
-    zip: int
+    zip: str
     avatar_url: str
 
 
