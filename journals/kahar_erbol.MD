@@ -8,6 +8,12 @@ The date of the entry:
 
 Keep your journal in reverse chronological order. Always put new entries at the top.
 ---
+## Apr 20, 2023
+* Added unique to username in users table, so the creation of users based on username will not be duplicated
+* In try_get_account_data, added the try word, so it can raise Exception when creating an item, for delete just add the get_account_data to protect the endpoints.
+* Installed the `npm install @galvanize-inc/jwtdown-for-react`
+
+
 ## Apr 13, 2023
 
 
@@ -16,7 +22,7 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 PostgreSQL smallint , int , bigint and oid are converted to Python int . PostgreSQL real and double are converted to Python float . PostgreSQL numeric is converted to Python Decimal.
 * Changed the data type in migration file, will rebuild the docker-compose again
 * Still got the bad request 400, but data passed into database, the problem could be something else, I decided to go on
-* solved the bad request problem, the response.state = 400, not 
+* solved the bad request problem, the response.state = 400, not response.statue_code = 200
 
 
 ## Apr 3, 2023

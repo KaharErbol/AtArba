@@ -16,7 +16,7 @@ def create_item(
     item: ItemIn,
     response: Response,
     repo: ItemRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.try_get_current_account_data),
     ): 
     response.status = 400
     return repo.create(item, account_data)
@@ -40,6 +40,7 @@ def update_item(
 def delete_item(
     item_id: int,
     repo: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete(item_id)
 

@@ -130,15 +130,7 @@ class AccountRepo:
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING
-                            id,
-                            first_name,
-                            last_name,
-                            username,
-                            email,
-                            phone,
-                            zip,
-                            hashed_password,
-                            avatar_url;
+                            id;
                         """,
                         [
                             user.first_name,
