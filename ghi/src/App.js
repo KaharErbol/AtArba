@@ -3,6 +3,7 @@ import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import MainPage from "./MainPage.js";
+import LoginForm from "./loginForm.js";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from "./Nav.js";
 import ItemsList from "./ItemsList.js";
@@ -38,11 +39,12 @@ function App() {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/" element={<MainPage items={items}/>} />
+        <Route path="/" element={<MainPage />} />
         <Route path="items">
           <Route index element={<ItemsList />} />  
           <Route path="new" element={<ItemForm />} />
         </Route>
+        <Route path="login" element={<LoginForm />} />
       </Routes>
 
     </BrowserRouter>

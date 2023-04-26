@@ -1,13 +1,23 @@
 import "./styles.css";
+import { useGetItemsQuery } from "./store/itemsApi";
+import ErrorNotification from "./ErrorNotification";
 
-function MainPage(props){
-    const items = props.items;
+
+function MainPage(){
+    // const items = props.items;
+    const {data, error, isLoading} = useGetItemsQuery();
+
+    if(isLoading) {
+        return (
+            <progress className="progress is-primary" max="100" ></progress>
+        );
+    }
 
     return(
         <>
-        <h1>Main Page</h1>
+        <ErrorNotification error={error} />
         <div className="cardContainer">
-            {items.map((item, index) => {
+            {data.map((item, index) => {
                 return (
                 <div className="card" key={item.id}>
                     {item.image_url.length > 10 ?
@@ -17,7 +27,9 @@ function MainPage(props){
                     <div className="cardTitle">{item.item_name}</div>
                     <div className="cardCategory">{item.category}</div>
                     <div className="cardPrice">${item.item_price.toFixed(2)}</div>
-                    <button className="cardButton">Detail</button>
+                    <div className="button-cart-div">
+                    <button type="button" className="button-24">Add to Cart</button>
+                    </div>
                 </div>
                 )
             })}

@@ -4,7 +4,7 @@ function Nav() {
     return (
         <nav>
             <div>
-                <NavLink to="/">Home</NavLink> | <NavLink to="items/new">List</NavLink>
+                <NavLink to="/">Home</NavLink> | <NavLink to="items/new">Sell</NavLink> | <NavLink to={"login"}>Sign In</NavLink>
             </div>
         </nav>
     );
