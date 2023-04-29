@@ -403,3 +403,14 @@ select {
   cursor: inherit;
   line-height: inherit;
 }
+
+nav {
+	height: 70px;
+	display: flex;
+	padding: 15px 20px;
+	box-shadow: 0px 3px 7.4px rgba(0, 0, 0, 0.1);
+}
+
+.nav--logo {
+	max-width: 100px;
+}

@@ -18,6 +18,7 @@ function ItemForm(){
     const [brand, setBrand] = useState('');
     const [price, setPrice] = useState('');
     const [listedDate, setListedDate] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleCategoryChange = e => {
         setCategory(e.target.value);
@@ -55,14 +56,29 @@ function ItemForm(){
     
     async function handleSubmit(e) {
         e.preventDefault();
-        createItem({itemName, category, imageUrl, description, brand, price, listedDate});
+        setIsSubmitting(true);
+        try {
+            await createItem({
+                item_name:itemName, 
+                category: category, 
+                image_url: imageUrl, 
+                item_description: description, 
+                brand: brand, 
+                item_price: price, 
+                listed_date: listedDate,
+            });
+            // navigate('/');
+        } catch (error) {
+            setError(error.message);
+        }
+        setIsSubmitting(false);
     }
 
-    if (result.isSuccess) {
-        navigate('/items');
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    // if (result.isSuccess) {
+    //     navigate('/');
+    // } else if (result.isError) {
+    //     setError(result.error);
+    // }
 
     return (
         <>
@@ -83,6 +99,7 @@ function ItemForm(){
                 <input 
                     label='item_name'
                     id='item_name'
+                    name='item_name'
                     placeholder="Item Name"
                     value={itemName}
                     onChange={handleItemNameChange}
@@ -92,6 +109,7 @@ function ItemForm(){
                 <input 
                     label='image_url'
                     id='image_url'
+                    name='image_url'
                     placeholder="Image URL"
                     value={imageUrl}
                     onChange={handleImageChange}
@@ -100,6 +118,7 @@ function ItemForm(){
                 <input 
                     label='item_description'
                     id='item_description'
+                    name='item_description'
                     placeholder="Description"
                     value={description}
                     onChange={handleDescription}
@@ -109,6 +128,7 @@ function ItemForm(){
                 <input 
                     label='brand'
                     id='brand'
+                    name='brand'
                     placeholder="Brand"
                     value={brand}
                     onChange={handleBrand}
@@ -118,6 +138,7 @@ function ItemForm(){
                 <input 
                     label='item_price'
                     id='item_price'
+                    name='item_price'
                     placeholder="Price"
                     value={price}
                     onChange={handlePrice}
@@ -127,13 +148,17 @@ function ItemForm(){
                 <input 
                     label='listed_date'
                     id='listed_date'
+                    name='listed_date'
                     placeholder="Listed Date"
                     value={listedDate}
                     onChange={handleDate}
                     type="date"
                     required
                 />
-                <button className="button-24" >Submit</button>
+                <button className="button-24" disabled={isSubmitting} >Submit</button>
+                {result.isSuccess && (
+                    <div className="success-message">Item created successfully!</div>
+                )}
             </form>
         </div>
         </>

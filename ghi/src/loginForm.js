@@ -35,7 +35,7 @@ function LoginForm() {
     }
 
     if (result.isSuccess) {
-        navigate('/items');
+        navigate('/');
     } else if (result.isError) {
         setError(result.error);
     }
@@ -74,7 +74,7 @@ function LoginForm() {
                 </form>
 	        </div>
             <div className="form-container sign-in-container">
-                <form action="#">
+                <form onSubmit={handleSubmit}>
                     <h1>Sign in</h1>
                     <div className="social-container">
                         <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -82,8 +82,8 @@ function LoginForm() {
                         <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
                     </div>
                     <span>or use your account</span>
-                    <input type="text" placeholder="Username" />
-                    <input type="text" placeholder="Password" />
+                    <input type="text" id="username" value={username} onChange={handleUsername} placeholder="Username" />
+                    <input type="text" id="password" value={password} onChange={handlePassword} placeholder="Password" />
                     <a href="#">Forgot your password?</a>
                     <button>Sign In</button>
                 </form>
@@ -104,28 +104,6 @@ function LoginForm() {
 	        </div>
         </div>
         </div>
-        {/* <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                name="username"
-                id="username"
-                placeholder="username"
-                required
-                value={username}
-                onChange={handleUsername}
-            />
-            <input 
-                type="text"
-                name="password"
-                id="password"
-                placeholder="password"
-                required
-                value={password}
-                onChange={handlePassword}
-            />
-            <button className="button-24" >Login</button>
-        </form> */}
         </>
     );
 }
