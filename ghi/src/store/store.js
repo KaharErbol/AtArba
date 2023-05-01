@@ -3,9 +3,11 @@ import { itemsApi } from './itemsApi';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { categoriesApi } from './categoriesApi';
 import { authApi } from './authApi';
+import cartSlice from './cartSlice';
 
 export const store = configureStore({
   reducer: {
+    cart: cartSlice,
     [itemsApi.reducerPath]: itemsApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

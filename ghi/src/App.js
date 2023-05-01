@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from "./Nav.js";
 import ItemsList from "./ItemsList.js";
 import ItemForm from "./ItemForm.js";
+import Cart from "./components/Cart.js";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path="new" element={<ItemForm />} />
         </Route>
         <Route path="login" element={<LoginForm />} />
+        <Route path="cart" element={<Cart />} />
       </Routes>
 
     </BrowserRouter>

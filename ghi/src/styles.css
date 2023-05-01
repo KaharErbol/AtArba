@@ -1,3 +1,9 @@
+.cart-row {
+	border: gray;
+	display: inline;
+	padding-left: 20px;
+}
+
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
@@ -8,7 +14,7 @@
   padding-top: 30px;
 }
 
-.card {
+.item-card {
   width: calc(25% - 16px);
   background-color: white;
   border: 1px solid #ddd;
@@ -413,4 +419,13 @@ nav {
 
 .nav--logo {
 	max-width: 100px;
+}
+
+.Nav {
+	margin: 10px;
+}
+
+.Nav-Right {
+	float: right;
+	margin: 10px;
 }
