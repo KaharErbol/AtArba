@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoginMutation } from "./store/authApi";
 import { useNavigate } from "react-router-dom";
 
 
-function LoginForm() {
+
+function LoginForm({ token }) {
 
     const [containerClass, setContainerClass] = useState('');
 
@@ -18,10 +19,10 @@ function LoginForm() {
     // login info
     const navigate = useNavigate();
     const [login, result] = useLoginMutation();
-    const [err, setError] = useState('');
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const handleUsername = e => {
         setUsername(e.target.value);
     }
@@ -31,14 +32,25 @@ function LoginForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        login({username, password});
+        await login({ 'username': username, 'password': password });
+        e.target.reset();
     }
 
-    if (result.isSuccess) {
-        navigate('/');
-    } else if (result.isError) {
-        setError(result.error);
-    }
+    useEffect(() => {
+        if (result.isSuccess) {
+            alert(`Welcome back, ${username}!`)
+            navigate('/items');
+        } else if (result.isError) {
+            alert('Error!');
+            result.reset();
+        }
+    }, [result.isSuccess, result.isError, username, navigate]);
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     // Sing Up
     const [firstName, setFirstName] = useState('');
@@ -83,7 +95,7 @@ function LoginForm() {
                     </div>
                     <span>or use your account</span>
                     <input type="text" id="username" value={username} onChange={handleUsername} placeholder="Username" />
-                    <input type="text" id="password" value={password} onChange={handlePassword} placeholder="Password" />
+                    <input type="password" id="password" value={password} onChange={handlePassword} placeholder="Password" />
                     <a href="#">Forgot your password?</a>
                     <button>Sign In</button>
                 </form>

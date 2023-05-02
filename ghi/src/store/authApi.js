@@ -1,22 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().authentication.token;
 
-    if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
-    }
-
-    return headers;
-  },
-});
 
 export const authApi = createApi({
   reducerPath: 'authentication',
   tagTypes: ['Token'],
-  baseQuery,
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
+    credentials: 'include',
+  }),
   endpoints: builder => ({
     login: builder.mutation({
       query: info => {
@@ -32,21 +24,46 @@ export const authApi = createApi({
           url: '/token',
           method: 'post',
           body: formData,
-          credentials: 'include',
         };
       },
-      invalidatesTags: result => {
-        return (result && ['Account']) || [];
+      invalidatesTags: ['Token'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          await dispatch(authApi.endpoints.getToken.initiate());
+        } catch (e) {
+          return;
+        }
       },
     }),
     getToken: builder.query({
       query: () => ({
         url: '/token',
-        credentials: 'include',
       }),
       providesTags: ['Token'],
     }),
+    signUp: builder.mutation({
+      query: (data) => ({
+        url: '/accounts',
+        body: data,
+        method: 'post',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['Token'],
+    }),
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: '/token',
+        method: 'delete',
+      }),
+      invalidatesTags: ['Token']
+,    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { 
+  useLoginMutation,
+  useGetTokenQuery,
+  useSignUpMutation,
+  useLogoutUserMutation, 
+} = authApi;

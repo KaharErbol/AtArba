@@ -3,7 +3,7 @@ import Cart from "../components/Cart";
 
 const initialState = [];
 
-const carSlice = createSlice({
+const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
@@ -17,5 +17,5 @@ const carSlice = createSlice({
     }
 });
 
-export const{ add,remove } = carSlice.actions;
-export default carSlice.reducer;
+export const{ add,remove } = cartSlice.actions;
+export default cartSlice.reducer;

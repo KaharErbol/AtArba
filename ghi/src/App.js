@@ -9,46 +9,26 @@ import Nav from "./Nav.js";
 import ItemsList from "./ItemsList.js";
 import ItemForm from "./ItemForm.js";
 import Cart from "./components/Cart.js";
-
+import { useGetTokenQuery } from "./store/authApi.js";
+import LandingPage from './LandingPage';
+import Protected from "./utilities/Protected.js";
 
 function App() {
-  const [items, setItems] = useState([]);
-  // const [launchInfo, setLaunchInfo] = useState([]);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/items`;
-  //     // console.log("fastapi url: ", url);
-  //     let response = await fetch(url);
-  //     // console.log("------- hello? -------");
-  //     let data = await response.json();
-  //     // console.log(data)
-  //     setItems(data);
-  //     // if (response.ok) {
-  //     //   console.log("got launch data!");
-  //     //   setLaunchInfo(data.launch_details);
-  //     // } else {
-  //     //   console.log("drat! something happened");
-  //     //   setError(data.message);
-  //     // }
-  //   }
-  //   getData();
-  // }, []);
+  const { data } = useGetTokenQuery();
 
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav isLoggedIn = {data} />
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="items">
-          <Route index element={<ItemsList />} />  
-          <Route path="new" element={<ItemForm />} />
+        <Route element={<Protected token={data}/>}>
+          <Route path="/items" element={<MainPage />}/>
+          <Route path="/items/new" element={<ItemForm />}/>
+          {/* <Route path="/items/:id" element={<ItemDetail />}/> */}
+          <Route path="cart" element={<Cart />} />
         </Route>
-        <Route path="login" element={<LoginForm />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="login" element={<LoginForm token={ data }/>} />
+        <Route path="/" element={<LandingPage />}/>
       </Routes>
-
     </BrowserRouter>
   );
 }
