@@ -1,21 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().authentication.token;
-
-    if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
-    }
-
-    return headers;
-  },
-});
 
 export const itemsApi = createApi({
     reducerPath: 'items',
-    baseQuery,
+    baseQuery: fetchBaseQuery({
+      baseUrl: process.env.REACT_APP_SAMPLE_SERVICE_API_HOST,
+      credentials: 'include',
+    }),
     tagTypes: ['ItemsList'],
     endpoints: builder => ({
         getItems: builder.query({
@@ -30,7 +21,27 @@ export const itemsApi = createApi({
             }),
             invalidatesTags: ['ItemsList'],
         }),
+        deleteItem: builder.mutation({
+          query: id => ({
+                url: `/items/${id}`,
+                method: 'delete',
+            }),
+            invalidatesTags: ['ItemsList'],
+        }),
+        updateItem: builder.mutation({
+          query: ({ id, data}) => ({
+                url: `/items/${id}`,
+                data: data,
+                method: 'put',
+            }),
+            invalidatesTags: ['ItemsList'],
+        }),
     }),
 });
 
-export const { useGetItemsQuery, useCreateItemMutation } = itemsApi; 
+export const { 
+  useGetItemsQuery, 
+  useCreateItemMutation,
+  useDeleteItemMutation,
+  useUpdateItemMutation,
+} = itemsApi; 

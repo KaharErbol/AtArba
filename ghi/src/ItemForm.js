@@ -53,6 +53,7 @@ function ItemForm(){
             <progress className="progress is-primary" max="100" ></progress>
         );
     }
+
     
     async function handleSubmit(e) {
         e.preventDefault();
@@ -74,11 +75,11 @@ function ItemForm(){
         setIsSubmitting(false);
     }
 
-    // if (result.isSuccess) {
-    //     navigate('/');
-    // } else if (result.isError) {
-    //     setError(result.error);
-    // }
+    if (result.isSuccess) {
+        navigate('/items');
+    } else if (result.isError) {
+        setError(result.error);
+    }
 
     return (
         <>
