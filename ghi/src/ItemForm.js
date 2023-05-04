@@ -75,11 +75,13 @@ function ItemForm(){
         setIsSubmitting(false);
     }
 
+
     if (result.isSuccess) {
-        navigate('/items');
+    navigate('/items');
     } else if (result.isError) {
         setError(result.error);
     }
+
 
     return (
         <>
