@@ -12,12 +12,16 @@ import Cart from "./components/Cart.js";
 import { useGetTokenQuery } from "./store/authApi.js";
 import LandingPage from './LandingPage';
 import Protected from "./utilities/Protected.js";
+import Counter from "./components/Counter.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { data } = useGetTokenQuery();
 
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Nav isLoggedIn = {data} />
       <Routes>
         <Route element={<Protected token={data}/>}>
@@ -26,6 +30,7 @@ function App() {
           {/* <Route path="/items/:id" element={<ItemDetail />}/> */}
           <Route path="cart" element={<Cart />} />
         </Route>
+        <Route path="/counter" element={<Counter />} />
         <Route path="login" element={<LoginForm token={ data }/>} />
         <Route path="/" element={<LandingPage />}/>
       </Routes>
