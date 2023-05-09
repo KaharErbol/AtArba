@@ -16,7 +16,8 @@ as a foreign key?
 
 ## Live Demo
 
-<iframe src="https://vimeo.com/824974440?share=copy" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+![Alt text](AtArba-MVP.gif)
+
 
 
 ## Design
