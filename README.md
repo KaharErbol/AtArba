@@ -26,7 +26,7 @@ as a foreign key?
 
 
 ## API Endpoints (Fast API)
-url: http://localhost:8000/docs
+local url: http://localhost:8000/docs
 ![API](API-Endpoints.png)
 
 
