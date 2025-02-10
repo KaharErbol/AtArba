@@ -35,7 +35,7 @@ local url: http://localhost:8000/docs
 ## Installation
 
 1. Fork repository
-2. Clone repository to local: git clone https://gitlab.com/
+2. Clone repository to local: git clone 
 3. cd into new project directory
 4. Run: docker volume create postgres-data
 5. Run docker volume create pg-admin
